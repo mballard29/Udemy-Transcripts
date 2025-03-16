@@ -1,4 +1,6 @@
 # Udemy Trancripts
+Make Udemy transcripts more accessible. Outputs to .pdf files and .docx files with the ability to also output to .txt files. Annotate .pdf files on iPad or tablet. Edit .docx files, highlight, underline, italicize in your preferred word processor. Included is the main script, example files of Udemy HTML pages, and example outputs. If you'd like to test this tool, you will need to change the file path listed on lines 9 and 11 to match the path where you clone your project folder to. If you use Mac and Windows, you will need to change both. If you only use one, you can exchange the if-else block for a single `project = Path('<path to project folder>')`. You will also need to change the parsing of the video titles attribute into the title string on line 64. Made with Python and BeautifulSoup, FPDF2, and docx modules. 
+
 
 ### Download:
 - Clone repo
