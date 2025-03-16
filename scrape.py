@@ -59,6 +59,8 @@ if __name__ == '__main__':
             
             # two output filenames/formats and locations
             # CHANGE based on the course you are taking
+            # Original parses: 'Section X: Example Section Title, Lecture Y: Example Lecture Title'
+            # to 'Lecture Y - Example Lecture Title.<ext>'
             title = title[(title.find(',')+1):(title.find('(')-1)].replace(':', ' -')
             txt_fn = Path('output/docx/') / (title + '.docx')
             pdf_fn = Path('output/pdf/') / (title + '.pdf')
