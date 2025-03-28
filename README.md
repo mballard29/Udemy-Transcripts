@@ -7,7 +7,7 @@ Make Udemy transcripts more accessible. Outputs video transcript to .docx and .p
 - Create virtual environment: `python3 -m venv env`
 - Activate:
     - Mac: `source env/bin/activate`
-    - Windows (Powershell): `.\env\Scripts\Activate.ps1`
+    - Windows (Powershell): `env\Scripts\Activate.ps1`
 - Install required packages: `pip3 install -r requirements.txt`
     - if this giving issues, can try: `python3 -m pip install -r requirements.txt`
 - Review `scrapy.py` and make necessary changes (lines 8-12 project path, line 80 video title parsing)
