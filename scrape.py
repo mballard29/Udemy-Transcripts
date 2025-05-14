@@ -3,28 +3,21 @@ import sys
 from pathlib import Path
 from bs4 import BeautifulSoup
 from fpdf import FPDF
-import docx
-
-# CHANGE to your project folder
-if os.name == 'posix':  # mac
-    project = Path('<Path to Project>/Udemy Transcripts/')
-else:                   # windows is 'nt'
-    project = Path('<Path to Project>/Udemy-Transcripts/')
-    
+import docx    
 
 def clean_folder(name):
     if name == 'output': 
-        path = project / 'output' / 'docx'
+        path = Path.cwd() / 'output' / 'docx'
         old_out = os.listdir(path)
         for o in old_out:
             os.remove(Path('output/docx') / o)
-        path = project / 'output' / 'pdf'
+        path = Path.cwd() / 'output' / 'pdf'
         old_out = os.listdir(path)
         for o in old_out:
             os.remove(Path('output/pdf') / o)
         return
     elif name == 'sources':
-        path = project / 'sources'
+        path = Path.cwd() / 'sources'
         old_out = os.listdir(path)
         for o in old_out:
             os.remove(Path('sources') / o)
@@ -51,7 +44,7 @@ if __name__ == '__main__':
     # USAGE: python3 scrape.py
     else:
         # open sources
-        path = project / 'sources'
+        path = Path.cwd() / 'sources'
         sources = os.listdir(path)
 
         # get doc body, format filename and save location
