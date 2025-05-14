@@ -52,3 +52,8 @@ Make Udemy transcripts more accessible. Outputs video transcript to .docx and .p
 ##### Other notes:
 - For these instructions, Control (Ctrl) on Windows is functionally equivalent to Command (Cmd) button on Mac
 - Windows systems use the `py` command instead of `python` or `python3` in Linux and MacOS systems
+- For first time VS code Github source control setup, may have to run
+  <pre>
+      git config --global user.email "your email" 
+        git config --global user.name "your name"
+  </pre>
