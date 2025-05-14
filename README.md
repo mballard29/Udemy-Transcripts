@@ -8,13 +8,13 @@ Make Udemy transcripts more accessible. Outputs video transcript to .docx and .p
 - Activate:
     - Mac: `source env/bin/activate`
     - Windows (Powershell): `env\Scripts\Activate.ps1`
+    - VS code: accept if prompt pops up asking if you'd like to make virtual environment default way to run and debug (integrated terminal automatically have env activated and run all commands through it)
 - Install required packages: `pip3 install -r requirements.txt`
     - if this giving issues, can try: `python3 -m pip install -r requirements.txt`
-- Review `scrapy.py` and make necessary changes (lines 8-12 project path, line 80 video title parsing)
+- Review `scrapy.py` and make necessary changes (line 80 video title parsing)
 
 ### Workflow:
-- Run `python3 scrape.py -prep` to empty sources folder. When prompted, input video number of first video to scrape and last (If videos are numbered in course, can use that. If not, can use 1 and number of input videos).
-- (Open all created empy HTML files)
+- Run `python3 scrape.py -prep` to empty sources folder. When prompted, input video number of first video to scrape and last (If videos are numbered in course, can use that. If not, can use 1 and number of input videos). This will create numbered html files for you to place the html content from pages where you are trying to get the transcript from.
 - For each Udemy video:
     - Maximize the video window so that all dynamic content is visible
     - Click the `open transcript` button
@@ -33,9 +33,8 @@ Make Udemy transcripts more accessible. Outputs video transcript to .docx and .p
 
 ### Common Errors
 1. Project folder structure incorrect
-2. Incorrect project path variable in `scrape.py` script
-3. Missing dependencies (in active venv, run `pip freeze` to check if it matches `requirements.txt`, check if venv is using pip or pip3)
-4. Incorrectly copied HTML pages
+2. Missing dependencies (in active venv, run `pip freeze` to check if it matches `requirements.txt`, check if venv is using pip or pip3)
+3. Incorrectly copied HTML pages
    - transcript was not opened and visible in webpage when copying and pasting HTML
    - when scraping transcripts from a batch of videos, may miss a video, copy and paste one twice, accidentally toggle off transcript in between repeat copy and pasting, etc. (double check your work)
 
@@ -49,3 +48,7 @@ Make Udemy transcripts more accessible. Outputs video transcript to .docx and .p
 ##### Note:
 - If you choose to test this tool, it is expected that you know some Python, some HTML, and have some understanding of file naming rules in the filesystem you use. This is a tool that I have tested and has worked for the applications for which I have tried to use it, but customization is necessary for use by others who may be interested.
 - Udemy is a content hosting platform where creators can provide paid online classes. This tool cannot provide access to a user who does not already have a Udemy account and does not have access to a course (for which they have paid). This is an add-on tool to increase the accessibility of already existing accessibility features. If you choose to use this tool, you recognize that you are accessing someone's intellectual property for personal use, and the initial creator of this tool (Mason Ballard) is not liable for any copyright infringement or violation of IP fair use should you choose to distribute that content without the video creator's or course creator's express permission.
+
+##### Other notes:
+- For these instructions, Control (Ctrl) on Windows is functionally equivalent to Command (Cmd) button on Mac
+- Windows systems use the `py` command instead of `python` or `python3` in Linux and MacOS systems
