@@ -13,7 +13,7 @@ Make Udemy transcripts more accessible. Outputs video transcript to .docx and .p
 - Review `scrapy.py` and make necessary changes (lines 8-12 project path, line 80 video title parsing)
 
 ### Workflow:
-- Run `python3 scrape.py -prep` to empty sources folder. When prompted, input video number of first video to scrape and last (If videos are numbered in course, can use that. If not, can use 1 and number of input videos).
+- Run `python3 scrape.py -p` to empty sources folder. When prompted, input video number of first video to scrape and last (If videos are numbered in course, can use that. If not, can use 1 and number of input videos).
 - (Open all created empy HTML files)
 - For each Udemy video:
     - Maximize the video window so that all dynamic content is visible
