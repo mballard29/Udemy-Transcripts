@@ -1,5 +1,4 @@
-import os
-import sys
+import re
 from pathlib import Path
 from bs4 import BeautifulSoup
 from fpdf import FPDF
@@ -14,15 +13,16 @@ def add_section():
             touch.write('')
 
 def clean_output():
-    # clean sources folder and output folder
-    items = list(Path('output/docx').iterdir()) + list(Path('output/pdf').iterdir())
-    for item in items:
-        item.unlink()
+    # clean output folder
+    folders = list(Path('output/docx').iterdir()) + list(Path('output/pdf').iterdir())
+    for folder in folders:
+        for file in folder.iterdir():
+            file.unlink()
+        folder.rmdir()
 
     # remove .DS_Store files
     items = Path.cwd().rglob('*')
     for item in items:
-        print(item)
         if str(item).find('DS_Store') != -1:
             item.unlink()
 
@@ -58,11 +58,9 @@ else:
                 # get and format transcript
                 lines = soup.find_all('p', class_='transcript--underline-cue---xybZ')
                 for l in lines:
-                    print(repr(l))
                     transcript += l.get_text() + ' '
-                transcript = transcript.replace('                                ', ' ') \
-                    .replace('\n', ' ') \
-                    .replace('   ', ' ')
+                transcript = transcript.replace('\n', '')
+                transcript = re.sub('\s+', ' ', transcript)
                 if transcript[0] == ' ':
                     transcript = transcript[1:]
             
