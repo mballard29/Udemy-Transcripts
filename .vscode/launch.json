@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // test scrape script
+            "name": "Python Env Debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scrape.py",
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/env/bin/python3.9" 
+            // "python": "${workspaceFolder}\\venv\\Scripts\\python.exe" // for Windows
+        },
+        {
+            // unit test scrape script
+            "name": "Python Review Debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scrape.py",
+            "args": ["--reviews", "--wordOnly"],
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/env/bin/python3.9" 
+            // "python": "${workspaceFolder}\\venv\\Scripts\\python.exe" // for Windows
+        }
+    ]
+}
