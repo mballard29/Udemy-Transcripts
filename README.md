@@ -1,17 +1,17 @@
 # Udemy Trancripts
-Make Udemy transcripts more accessible, make a digital learning platform more effective for kinesthetic learners or those who like to utilize a variety of learning techniquely to more deeply explore and learn topics. Outputs video transcripts or practice tests to .docx and .pdf files. Annotate .pdf files on iPad or tablet. Edit .docx files, highlight, underline, italicize in your preferred word processor. Included is the main script (`scrape.py`), example files of Udemy HTML video lesson pages and HTML practice test pages, and example outputs. If you'd like to test this tool, you will need to change the file paths listed on lines 9 and 11 to match the path where you have cloned your project folder to. If you use Mac and Windows, you will need to change both. If you only use one, you can exchange the if-else block for a single `project = Path('<path to project folder>')`. You will also need to change the parsing of the video title attribute to match the formatting of the video titles you are trying to scrape the title from and what you would like it parsed to (on line 80)(in order to follow file naming rules for your filesystem). Made with Python and BeautifulSoup, FPDF2, and docx modules. 
-
+Make Udemy transcripts more accessible, make learning more active, take advantage of multiple learning types. Takes Udemy course video pages, and outputs video transcripts. Takes practice test reviews, and outputs a clean, printable, editable documented. Outputs can be in .docx or .pdf formats or both. Annotate .pdf files on iPad or tablet. Edit .docx files, highlight, underline, italicize in your preferred word processor. Included is the main script (`scrape.py`), example files of Udemy HTML video lesson pages and HTML practice test pages, and example outputs. This repo is based on parsing Jason Dion's CompTIA Udemy video lessons and Practice Review pages. Anyone is free to explore this repo, but trying this tool independly will require a basic knowledge of Python as well as modifying the script to fit how your Udemy course instructor presents information (e.g., another course instructor will likely not use the same video title format). Made with [Python](https://www.python.org/downloads/) and [BeautifulSoup](https://pypi.org/project/beautifulsoup4/), [FPDF2](https://pypi.org/project/fpdf2/), and [Python DOCX](https://pypi.org/project/python-docx/) modules. 
 
 ### Download:
 - Clone repo
 - Create virtual environment: `python3 -m venv env`
-- Activate:
+- Activate virtual environment:
     - Mac: `source env/bin/activate`
     - Windows (Powershell): `env\Scripts\Activate.ps1`
     - VS code: accept if prompt pops up asking if you'd like to make virtual environment default way to run and debug (integrated terminal automatically have env activated and run all commands through it)
 - Install required packages: `pip3 install -r requirements.txt`
-    - if this giving issues, can try: `python3 -m pip install -r requirements.txt`
-- Review `scrapy.py` and make necessary changes (line 80 video title parsing)
+    - if this gives issues, can try: `python3 -m pip install -r requirements.txt`
+- Review `scrapy.py` and make necessary changes. Example changes:
+    - xxx
 
 ### Workflow:
 - Run `python3 scrape.py -p` to empty sources folder. When prompted, input video number of first video to scrape and last (If videos are numbered in course, can use that. If not, can use 1 and number of input videos).
