@@ -10,27 +10,10 @@ Make Udemy transcripts more accessible, make learning more active, take advantag
     - VS code: accept if prompt pops up asking if you'd like to make virtual environment default way to run and debug (integrated terminal automatically have env activated and run all commands through it)
 - Install required packages: `pip3 install -r requirements.txt`
     - if this gives issues, can try: `python3 -m pip install -r requirements.txt`
-- Review `scrapy.py` and make necessary changes. Example changes:
-    - xxx
+- Review `scrapy.py` and make necessary changes. Suggested customizations are written in the `scrape.py` script in comments that start with `CUSTOMIZE`
 
 ### Workflow:
-- Run `python3 scrape.py -p` to empty sources folder. When prompted, input video number of first video to scrape and last (If videos are numbered in course, can use that. If not, can use 1 and number of input videos).
-- (Open all created empy HTML files)
-- For each Udemy video:
-    - Maximize the video window so that all dynamic content is visible
-    - Click the `open transcript` button
-    - Right-click somewhere on page > `Inspect` to open the inspector window (when window is on the right, resize inspector window to be as small as possible to ensure all dynamic content is visible and therefore accessible in the DOM)
-    - Select the 'html' tagged element, Control+C to copy
-    - In `sources` project folder, paste html contents into created source file (will paste 'html' tag and child nodes; i.e, whole page)    
-- To run:
-    - Run `python3 scrape.py`
-    - Output will be placed in `output` folder
-       - (Title string parsing based initially based on Udemy course videos by Jason Dion)
-    - Check for missing files output file. Check to see if it's in source folder and `transcript-cue` tags are visible (indicates transcript was not visible in browser when HTML was copied), rerun if necessary.
-    - Copy+Paste to target folder (such as iCloud to annotate pdfs on iPad, or a save folder to edit in word processor)
-- Note:
-    - The output folder is cleaned out before every run, comment out that line to disable this behavior
-    - On Mac, remove .DS_Store files with `find <in-this-directory> -name ".DS_Store" -delete`
+- Common steps and workflows and their commands are listed in `runbook.sh` (should *not* be run as a start bash script)
 
 ### Common Errors
 1. Project folder structure incorrect
@@ -40,21 +23,19 @@ Make Udemy transcripts more accessible, make learning more active, take advantag
    - when scraping transcripts from a batch of videos, may miss a video, copy and paste one twice, accidentally toggle off transcript in between repeat copy and pasting, etc. (double check your work)
 
 ### Roadblocks During Implementation and To Further Tool Expansion:
-- Udemy must authenticate to see page. Testing to see if there is an automated way to grab video transcripts. As it standings available methods are (prohibitively) slow.
-- Udemy 'Instructors' have an API. The Affiliate API has been discontinued 1/1/25, and the Udemy Affiliate Program requires a special applicate. TLDR: No API available for regular users.
-- There is no script tag that seems to obviously/directly point to metadata or resource fetch requests that would allow static scraping
-- A lot of content on the page is dynamically loaded, including the content I am targeting. Looking at the Inspect window, the HTML only shows explicitly visible content (sensitive triggers/toggles), making resizing the browser window and inspection window necessary to see all available data.
+- Udemy must authenticate to see page
+- Udemy does not provide a publicly available API for regular users. (Only instructors, Affiliate program discontinued)
+- Pages are dynamically loaded. HTML only shows explicitly visible content (sensitive triggers/toggles). A visual inspection of the window while the Inspect window is open is necessary to ensure all desire info is accessible.
 - No FETCH/XHR requests are discernably for transcript data
 
 ##### Note:
-- If you choose to test this tool, it is expected that you know some Python, some HTML, and have some understanding of file naming rules in the filesystem you use. This is a tool that I have tested and has worked for the applications for which I have tried to use it, but customization is necessary for use by others who may be interested.
-- Udemy is a content hosting platform where creators can provide paid online classes. This tool cannot provide access to a user who does not already have a Udemy account and does not have access to a course (for which they have paid). This is an add-on tool to increase the accessibility of already existing accessibility features. If you choose to use this tool, you recognize that you are accessing someone's intellectual property for personal use, and the initial creator of this tool (Mason Ballard) is not liable for any copyright infringement or violation of IP fair use should you choose to distribute that content without the video creator's or course creator's express permission.
+- Udemy is a content hosting platform where creators can provide paid online classes. This is **not** a "outsmart the paywall" tool. It is a supplementary study tool to increase engagement with the material and increase the existing accessibility features of the Udemy platform. Anyone who chooses to use this tool, clone this repo, or customize it, acknowledges all course material is the instructor's intellectual property, and therefore, any content created from it should be used for personal use only. Anyone who clones this repo, customizes it, and uses this tool is responsible for any resulting copyright infringement, violation of IP, or violation of fair use.
 
 ##### Other notes:
-- For these instructions, Control (Ctrl) on Windows is functionally equivalent to Command (Cmd) button on Mac
-- Windows systems use the `py` command instead of `python` or `python3` in Linux and MacOS systems
+- Control (Ctrl) on Windows = Command (Cmd) button on Mac
+- Windows systems use the `py` command, Linux and MacOS uses `python` or `python3`
 - For first time VS code Github source control setup, may have to run
   <pre>
       git config --global user.email "your email" 
-        git config --global user.name "your name"
+      git config --global user.name "your name"
   </pre>

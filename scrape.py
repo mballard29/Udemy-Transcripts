@@ -67,6 +67,7 @@ def export_test_word(extract):
     table = doc.add_table(rows=1, cols=2)
     row = table.add_row().cells
     row[0].text = 'Date: '
+    # CUSTOMIZE: Domain Names or Learning Topics
     row[0].paragraphs[0].alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     row[1].text = '________________________________________________________'
     row = table.add_row().cells
@@ -74,23 +75,23 @@ def export_test_word(extract):
     row[0].paragraphs[0].alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     row[1].text = '________________________________________________________'
     row = table.add_row().cells
-    row[0].text = 'D1 - Networking Concepts: '
+    row[0].text = 'D1 - Domain 1 Name: '
     row[0].paragraphs[0].alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     row[1].text = '________________________________________________________'
     row = table.add_row().cells
-    row[0].text = 'D2 - Network Implementation: '
+    row[0].text = 'D2 - Domain 2 Name: '
     row[0].paragraphs[0].alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     row[1].text = '________________________________________________________'
     row = table.add_row().cells
-    row[0].text = 'D3 - Network Operations: '
+    row[0].text = 'D3 - Domain 3 Name: '
     row[0].paragraphs[0].alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     row[1].text = '________________________________________________________'
     row = table.add_row().cells
-    row[0].text = 'D4 - Network Security: '
+    row[0].text = 'D4 - Domain 4 Name: '
     row[0].paragraphs[0].alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     row[1].text = '________________________________________________________'
     row = table.add_row().cells
-    row[0].text = 'D5 - Network Troubleshooting: '
+    row[0].text = 'D5 - Domain 5 Name: '
     row[0].paragraphs[0].alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     row[1].text = '________________________________________________________'
     doc.add_page_break()
@@ -117,8 +118,10 @@ def export_pdf(extract):
     pdf.add_font(
         family="HelveticaNeue",
         style="", # regular,
-        fname= "/System/Library/Fonts/HelveticaNeue.ttc"
+        # CUSTOMIZE: This a MacOS font path, change font, or change path for Windows
+        fname= "/System/Library/Fonts/HelveticaNeue.ttc" 
     )
+    # CUSTOMIZE: Set font based on name given above
     pdf.set_font("HelveticaNeue", size = 12)
     pdf.set_margins(1, 1)
     effective_page_width = pdf.w - 2*pdf.l_margin
@@ -139,8 +142,10 @@ def export_test_pdf(extract):
     pdf.add_font(
         family="HelveticaNeue",
         style="", # regular,
+        # CUSTOMIZE: This a MacOS font path, change font, or change path for Windows
         fname= "/System/Library/Fonts/HelveticaNeue.ttc"
     )
+    # CUSTOMIZE: Set font based on name given above
     pdf.set_font("HelveticaNeue", size = 10)
     pdf.set_margins(1, 1)
     effective_page_width = pdf.w - 2*pdf.l_margin
@@ -148,11 +153,11 @@ def export_test_pdf(extract):
     front_matter += """
     Date: ________________________________________________________
     Overall: ________________________________________________________
-    D1 - Networking Concepts: ________________________________________________________
-    D2 - Network Implementation: ________________________________________________________
-    D3 - Network Operations: ________________________________________________________
-    D4 - Network Security: ________________________________________________________
-    D5 - Network Troubleshooting: ________________________________________________________\n"""
+    D1 - Domain 1 Name: ________________________________________________________
+    D2 - Domain 2 Name: ________________________________________________________
+    D3 - Domain 3 Name: ________________________________________________________
+    D4 - Domain 4 Name: ________________________________________________________
+    D5 - Domain 5 Name: ________________________________________________________\n"""
     body = ''
     for i, q in enumerate(extract['Body']):
         body += f"Question {i+1}: {q['Correct']}\n"
@@ -204,6 +209,7 @@ else:
     for source in Path('sources').iterdir():
         if str(source).find('DS_Store') != -1:
             continue
+        # Parsing video titles and transcripts
         if source.stem.isnumeric() and not args.reviews:
             try:
                 with open(source, 'r') as lesson:
@@ -211,7 +217,6 @@ else:
                     content = soup.find('div', attrs={'data-purpose':'transcript-panel'})
 
                     # get video title
-                    # example: Section 2: Network Fundamentals, Lecture 5: Network Components (OBJ. 1.2)
                     video_block = soup.find('div', attrs={'data-purpose': 'curriculum-item-viewer-content'})
                     title = video_block.find('section')['aria-label']
             except:
@@ -229,6 +234,8 @@ else:
                 )
 
                 # extract a filename from the video title
+                # Parsing from example: Section 2: Section Name, Lecture 5: Video Name (OBJ. 1.1)
+                # CUSTOMIZE: Parsing of video title into a output file name
                 filename = title
                 if 'OBJ' in filename:
                     filename = filename[ : filename.find('(OBJ')-1 ]
@@ -236,6 +243,8 @@ else:
                 filename = filename.replace(':', ' -').replace('/', ', ')
                 
                 # extract the section/folder name from the video title
+                # CUSTOMIZE: Parsing of video title to get section, making folder w same name to enclose lectures in the same section
+                # CUSTOMIZE Option 2: Remove section folders completely
                 section = title[ : title.find(', Lecture')] 
                 section = section.replace(':', ' -').replace('/', ', ')
                 
@@ -254,6 +263,7 @@ else:
                 if not args.wordOnly:
                     export_pdf(extract)
 
+        # Parsing Practice Tests
         elif not source.stem.isnumeric() and not args.transcripts:
             try:
                 with open(source, 'r') as test:
@@ -291,6 +301,7 @@ else:
                     q['Correct'] = question.find('span', attrs={'data-purpose': 'question-result-header-status-label'}).get_text()
                     # get the id = overall-explanation, get inner text, replace whitespaces like before
                     # remove troubleshoot message at end
+                    # CUSTOMIZE: Remove if no explanation, Remove excess info standard across explanation sections
                     q['Explanation'] = re.sub(' For support or reporting issues, include Question ID:.*$', '', re.sub('^\s{1}|\s{1}$', '', re.sub('\s+', ' ', question.find(id = 'overall-explanation').get_text())))
                     # add dict to list of questions
                     qs.append(q)
